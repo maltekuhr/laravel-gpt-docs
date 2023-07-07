@@ -1,0 +1,26 @@
+{
+  "name": "laravel-gpt-docs",
+  "version": "0.2.0",
+  "description": "The documentation for LaravelGPT",
+  "main": "index.js",
+  "scripts": {
+    "docs:dev": "vuepress dev docs",
+    "docs:build": "vuepress build docs"
+  },
+  "author": "Malte Kuhr",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/maltekuhr/laravel-gpt-docs.git"
+  },
+  "devDependencies": {
+    "vuepress": "^2.0.0-beta.64"
+  },
+  "keywords": [
+    "laravelgpt"
+  ],
+  "bugs": {
+    "url": "https://github.com/maltekuhr/laravel-gpt-docs/issues"
+  },
+  "homepage": "https://github.com/maltekuhr/laravel-gpt-docs#readme"
+}

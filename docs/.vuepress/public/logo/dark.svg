@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg id="Layer_2" data-name="Layer 2" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 4433.98 1024">
+  <defs>
+    <style>
+      .cls-1 {
+        letter-spacing: -.02em;
+      }
+
+      .cls-2 {
+        letter-spacing: -.01em;
+      }
+
+      .cls-3, .cls-4, .cls-5 {
+        fill: #fff;
+      }
+
+      .cls-6 {
+        fill: #0c2461;
+      }
+
+      .cls-4 {
+        font-family: InterV-SemiBold, 'Inter V';
+        font-size: 581.05px;
+        font-variation-settings: 'wght' 600, 'slnt' 0;
+        font-weight: 600;
+      }
+
+      .cls-7 {
+        letter-spacing: -.02em;
+      }
+
+      .cls-5 {
+        opacity: .35;
+      }
+    </style>
+  </defs>
+  <g id="Layer_1-2" data-name="Layer 1">
+    <rect class="cls-6" width="1024" height="1024" rx="209.9" ry="209.9"/>
+    <g>
+      <path class="cls-5" d="m551.54,653.23h-119.99v40c0,44.12,35.87,79.99,79.99,79.99h146.61l101.36,75.99c6,4.5,14.12,5.25,21,1.87s11-10.25,11-17.87v-59.99h40c44.12,0,79.99-35.87,79.99-79.99v-239.97c0-44.12-35.87-79.99-79.99-79.99h-159.98v159.98c0,66.24-53.74,119.99-119.99,119.99Z"/>
+      <path class="cls-3" d="m191.57,213.14c-44.12,0-79.99,35.87-79.99,79.99v239.97c0,44.12,35.87,79.99,79.99,79.99h40v59.99c0,7.62,4.25,14.5,11,17.87,6.75,3.37,14.87,2.62,21-1.87l101.36-75.99h186.6c44.12,0,79.99-35.87,79.99-79.99v-239.97c0-44.12-35.87-79.99-79.99-79.99H191.57Z"/>
+    </g>
+    <text class="cls-4" transform="translate(1208.96 705.53)"><tspan x="0" y="0">La</tspan><tspan class="cls-2" x="662.75" y="0">r</tspan><tspan class="cls-7" x="887.24" y="0">a</tspan><tspan class="cls-1" x="1209.54" y="0">v</tspan><tspan x="1533.29" y="0">elGPT</tspan></text>
+  </g>
+</svg>
