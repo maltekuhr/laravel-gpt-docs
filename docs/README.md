@@ -38,10 +38,6 @@ The published config file is located at `config/laravel-gpt.php`.
 ## Basic Usage
 In the following examples we are using LaravelGPT to determine the sentiment of a customer review. Both examples are delivering the same result, but the `GPTChat` example is more complex and provides more flexibility.
 
-Here's an optimized and completed version of your section:
-
----
-
 ### GPTAction
 #### Introduction
 `GPTAction` is a feature provided by LaravelGPT designed to handle scenarios where you need to perform a single task based on a single input. This construct is most suitable for straightforward tasks that don't require back-and-forth or conversation-like interactions with the model.
@@ -211,3 +207,71 @@ return $chat->latestMessage()->content;
 ::: tip
 This section of the documentation aims to explain the basic usage of LaravelGPT. For more detailed explanations of `GPTChat` and more advanced examples, please visit the Advanced Usage section.
 :::
+## Advanced Usage
+### Rules
+LaravelGPT uses the validation rules defined in the `rules()` method of `GPTAction` and `GPTFunction` classes to generate the documentation for the model. The rules are also used to validate the function calls. The validation rules are converted into a JSON schema and passed to the model. The model uses this schema to validate the function calls.
+
+::: warning Important
+LaravelGPT will validate the function call with all rules defined in the `rules()` method. As of July 2023 LaravelGPT does not support all Laravel validation rules for conversion into the JSON schema provided to the model. If you experience poor results, please create an issue or a pull request. You can add support for custom and missing rules by extending the `RuleConverter` class and adding the converter to the `laravel-gpt` config file.
+:::
+
+#### Custom Rule Converters
+LaravelGPT enables seamless integration of custom rules. To initiate a custom rule converter, execute the following command. Note that the `--clean` option purges any explanatory comments, and if the class name doesn't include a `RuleConverter` suffix, LaravelGPT will append it automatically.
+```bash
+php artisan make:rule-converter Example
+```
+This command generates a new `ExampleRuleConverter` class under the `App\GPT\RuleConverters` namespace. The `priority()` method determines the execution order of the rule converters — the higher the value, the sooner the rule converter gets triggered. The `handle()` method is responsible for transforming the rule into a JSON schema. Here is an example of the `ExampleRuleConverter` class:
+```php
+<?php
+
+namespace App\GPT\RuleConverters;
+
+use MalteKuhr\LaravelGPT\Services\JsonSchemaService\Converters\AbstractRuleConverter;
+
+class ExampleRuleConverter extends AbstractRuleConverter
+{
+    public static function priority(): int
+    {
+        return 0;
+    }
+
+    public function handle(): void
+    {
+        // TODO: Implement handle() method.
+    }
+}
+```
+
+#### Rule Conversion Process
+To convert a rule into a JSON schema, the rule must first be identified and applied to the field. This can be done by filtering the `$this->rules` array. You then need to convert the rules into a JSON Schema. It's recommended to familiarize yourself with the [JSON Schema](https://json-schema.org/understanding-json-schema/index.html) first. Once you've envisioned your desired outcome, you can manually adjust the `$this->schema` array or use one of the methods supplied by the `AbstractRuleConverter` class.
+
+##### Available Methods
+- `$this->addDescription(string $description)`: Appends a description to the current field. If a description already exists, the new description is added to it. To avoid appending the description, you can use the `setField()` method with a lower priority.
+
+- `$this->setType(string $type, bool $override = false)`: Determines the type of the current field. If a type already exists and `$override` is set to `false`, the method will throw a `FieldSetException`.
+
+- `$this->setField(string $field, $value, bool $override = false)`: Establishes the value of a given field. If a value already exists and `$override` is `false`, the method will throw a `FieldSetException`.
+
+- `$this->getType()`: Fetches the type of the current field.
+
+- `$this->getField(string $field)`: Retrieves the value of a specified field.
+
+::: tip Note
+The rule converter runs for every item in the `GPTFunction`'s or `GPTAction`s `rules()` array. The `$this->rules` refer to the rules of the current field. The package employs `explode()` if your original rules are separated by `|`. The `$this->field` represents the name of the current field, such as `name` if your key was `profile.key`.
+:::
+
+#### Registering Custom Rule Converters
+Last but not least, you need to register your custom rule converter in the `laravel-gpt.php` config file. If you haven't published the config file yet, please follow the Instructions at the [Publishing the Config File](#publishing-the-config-file) section.
+
+### Custom Description
+We've introduced a custom validation rule for attaching descriptions to fields in the process of generating documentation with Laravel validation rules. You can easily apply the `FieldDescription` to a field's validation rules by using the static `set()` method. This method takes a string as an argument, which is then added as a description via the `addDescription()` method from the `AbstractRuleConverter` class.
+
+```php
+public function rules(): array
+{
+    return [
+        'id' => ['required', 'integer', FieldDescription::set('The ID of the user')],
+    ];
+}
+```
+In this example, the string `'The ID of the user'` is provided to the `set()` method of `FieldDescription`, establishing it as the field's description.
