@@ -208,6 +208,9 @@ $chat->send();
 return $chat->latestMessage()->content;
 ```
 
+## Advanced Usage
+WIP
+
 ::: tip
 This section of the documentation aims to explain the basic usage of LaravelGPT. For more detailed explanations of `GPTChat` and more advanced examples, please visit the Advanced Usage section.
 :::
