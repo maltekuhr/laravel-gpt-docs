@@ -30,7 +30,7 @@ You are now ready to use LaravelGPT!
 ### Publishing the Config File
 You can publish the config file with:
 ```bash
-php artisan vendor:publish --provider="MalteKuhr\LaravelGPT\Providers\GPTServiceProvider" --tag="config"
+php artisan vendor:publish --provider="MalteKuhr\LaravelGPT\Providers\GPTServiceProvider" --tag="public"
 ```
 
 The published config file is located at `config/laravel-gpt.php`.
